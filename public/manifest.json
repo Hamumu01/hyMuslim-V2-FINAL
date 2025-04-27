@@ -1,0 +1,63 @@
+{
+  "name": "hyMuslimplus",
+  "short_name": "hyMuslimplus",
+  "dir": "auto",
+  "description": "Your companion for prayer and Quran reading with accurate prayer times",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/hyMuslimplus-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/hyMuslimplus-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/hyMuslimplus-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/hyMuslimplus-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Prayer Times",
+      "short_name": "Prayer",
+      "url": "/prayer",
+      "icons": [
+        {
+          "src": "/icons/hyMuslimplus-180.png",
+          "sizes": "180x180",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Read Quran",
+      "short_name": "Quran",
+      "url": "/quran",
+      "icons": [
+        {
+          "src": "/icons/hyMuslimplus-180.png",
+          "sizes": "180x180",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

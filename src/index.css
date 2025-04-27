@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-quran {
+  font-family: 'Amiri', serif;
+}
+
+.font-traditional {
+  font-family: 'Scheherazade New', serif;
+}
+
+.font-modern {
+  font-family: 'Noto Naskh Arabic', serif;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-full transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-green-600 text-white hover:bg-green-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-emerald-500 text-white hover:bg-emerald-600;
+  }
+  
+  .card {
+    @apply p-4 rounded-2xl shadow-md bg-white dark:bg-gray-800;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500;
+  }
+}
+
+/* Custom gradient backgrounds */
+.bg-prayer-card {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.bg-quran-card {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.ayah-container:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animation for transitions */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Navigation animations */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Touch feedback animation */
+.nav-press {
+  transform: scale(0.9);
+}
+
+/* Navigation bar styles */
+.nav-active {
+  color: white;
+  position: relative;
+}
+
+.nav-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #16a34a;
+  border-radius: 9999px;
+  z-index: -1;
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.nav-inactive {
+  color: #6b7280;
+}
+
+.nav-container {
+  background-color: #171717;
+  border-radius: 9999px;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 2px;
+  background-color: #374151;
+  border-radius: 9999px;
+}
+/* Animation for gradient background */
+@keyframes gradient-slow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradient-slow 15s ease infinite;
+}
+
+/* Card hover effects */
+.card {
+  @apply transition-all duration-300 hover:shadow-lg;
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, #16a34a 0%, #059669 100%);
+  background-size: 200% 200%;
+  transition: all 0.3s ease;
+}
+
+.card-gradient:hover {
+  background-position: 100% 0%;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(22, 163, 74, 0.1), 0 10px 10px -5px rgba(22, 163, 74, 0.04);
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+  }
+  
+  100% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
+}
