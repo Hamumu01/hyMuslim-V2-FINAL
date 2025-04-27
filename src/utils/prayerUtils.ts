@@ -79,15 +79,15 @@ export const calculateNextPrayer = (prayerTimes: Record<string, string>) => {
   return nextPrayer || prayerTimesInMinutes[0];
 };
 
+import { shouldNotifyForPrayer, getMinutesBefore } from './notificationUtils';
+
 export const scheduleNotification = (prayerName: string, prayerTime: string) => {
   if (!('Notification' in window)) {
     console.error('This browser does not support desktop notification');
     return;
   }
   
-  // Import notification preferences
-  const { shouldNotifyForPrayer, getMinutesBefore } = require('./notificationUtils');
-  
+
   // Check if notifications are enabled for this prayer
   if (!shouldNotifyForPrayer(prayerName)) {
     return;

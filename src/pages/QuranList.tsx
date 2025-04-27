@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import Header from '../components/Header';
-import { cleanQuranText } from '../utils/textCleaner';
 
 interface Surah {
   number: number;

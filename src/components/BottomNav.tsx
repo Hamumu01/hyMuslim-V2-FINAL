@@ -5,13 +5,11 @@ import { useEffect, useState } from 'react';
 const BottomNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('/');
   const [isPressing, setIsPressing] = useState<string | null>(null);
   
   useEffect(() => {
     // Update active tab based on current location
     const path = location.pathname === '/' ? '/' : location.pathname.split('/')[1];
-    setActiveTab(path === '' ? '/' : `/${path}`);
   }, [location.pathname]);
   
   const getActiveRoute = (path: string) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Bookmark, ChevronLeft, ChevronRight, Share } from 'lucide-react';
+import { Bookmark, Share } from 'lucide-react';
 import Header from '../components/Header';
 import ChevronUp from '../components/ChevronUp';
 import { saveLastRead } from '../utils/quranUtils';
@@ -194,31 +194,34 @@ const SurahViewer = () => {
           
           {/* Verses */}
           <div className="space-y-6">
-            {surah.verses.map(verse => (
-              <div key={verse.number} className="ayah-container py-4">
-                <div className="flex justify-between items-center mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center justify-center w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full">
-                      <span className="text-xs text-green-600 dark:text-green-300">{verse.number}</span>
+            {surah.verses && Array.isArray(surah.verses)
+              ? surah.verses.map((verse: Verse) => {
+                  return (
+                    <div key={verse.number} className="ayah-container py-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center justify-center w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full">
+                            <span className="text-xs text-green-600 dark:text-green-300">{verse.number}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button 
+                            onClick={() => handleBookmark(verse.number)}
+                            className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+                          >
+                            <Bookmark size={16} />
+                          </button>
+                          <button className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                            <Share size={16} />
+                          </button>
+                        </div>
+                      </div>
+                      <p dir="rtl" className={`text-right leading-loose mb-3 ${fontSettings.quranFontSize} ${fontSettings.quranFontFamily}`}>{verse.text}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">{verse.translation}</p>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button 
-                      onClick={() => handleBookmark(verse.number)}
-                      className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
-                    >
-                      <Bookmark size={16} />
-                    </button>
-                    <button className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-                      <Share size={16} />
-                    </button>
-                  </div>
-                </div>
-                
-                <p dir="rtl" className={`text-right leading-loose mb-3 ${fontSettings.quranFontSize} ${fontSettings.quranFontFamily}`}>{verse.text}</p>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">{verse.translation}</p>
-              </div>
-            ))}
+                  );
+                })
+              : null}
           </div>
           
           {/* Navigation buttons */}

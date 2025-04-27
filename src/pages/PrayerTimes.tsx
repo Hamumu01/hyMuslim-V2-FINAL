@@ -41,7 +41,13 @@ const PrayerTimes = () => {
     // Get selected city from localStorage
     const savedCity = localStorage.getItem('selectedCity');
     if (savedCity) {
-      setSelectedCity(JSON.parse(savedCity));
+      let cityObj: { id: string; name: string } | null = null;
+      try {
+        cityObj = JSON.parse(savedCity);
+      } catch (e) {
+        cityObj = null;
+      }
+      setSelectedCity(cityObj);
     }
     
     // Set hijri date (placeholder)

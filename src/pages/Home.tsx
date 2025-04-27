@@ -15,7 +15,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ toggleDarkMode }) => {
   const navigate = useNavigate();
   const [hijriDate, setHijriDate] = useState<string>('');
-  const [hijriLoading, setHijriLoading] = useState<boolean>(true);
+  
   const [nextPrayer, setNextPrayer] = useState<{ name: string; time: string } | null>(null);
   const [countdownTime, setCountdownTime] = useState('');
   const [prayerTimes, setPrayerTimes] = useState<Record<string, string>>({});
@@ -66,7 +66,7 @@ const Home: React.FC<HomeProps> = ({ toggleDarkMode }) => {
   }, [navigate]);
 
   useEffect(() => {
-    setHijriLoading(true);
+    
     fetchHijriToday()
       .then((data) => {
         if (data && data.date && data.month && data.year) {
@@ -93,18 +93,23 @@ const Home: React.FC<HomeProps> = ({ toggleDarkMode }) => {
           setHijriDate(cached);
         } else {
           // fallback manual
-          const today = new Date();
-          const hijri = gregorianToHijri(today);
-          setHijriDate(`${hijri.date} ${hijri.month} ${hijri.year} H`);
+            const today = new Date();
+            const hijri = gregorianToHijri(today);
+            setHijriDate(`${hijri.date} ${hijri.month} ${hijri.year} H`);
         }
       })
-      .finally(() => setHijriLoading(false));
+      .finally(() => {});
 
     // Get selected city from localStorage
     const savedCity = localStorage.getItem('selectedCity');
     if (savedCity) {
-      const cityObj = JSON.parse(savedCity);
-      if (cityObj && cityObj.name) {
+      let cityObj: { id: string; name: string } | null = null;
+      try {
+        cityObj = JSON.parse(savedCity);
+      } catch (e) {
+        cityObj = null;
+      }
+      if (cityObj && typeof cityObj.name === 'string') {
         cityObj.name = cityObj.name.replace(/^[,\s]+/, '');
       }
       setSelectedCity(cityObj);

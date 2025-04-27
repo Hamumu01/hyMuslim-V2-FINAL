@@ -51,7 +51,6 @@ export function App() {
     // Handle installed event
     window.addEventListener('appinstalled', () => {
       console.log('App was installed');
-      deferredPrompt = null;
     });
 
     // Check if permission is granted for notifications
