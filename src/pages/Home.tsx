@@ -134,6 +134,7 @@ const Home: React.FC<HomeProps> = ({ toggleDarkMode }) => {
         // Schedule notifications for each prayer time if enabled
         if (notificationsEnabled) {
           Object.entries(times).forEach(([prayer, time]) => {
+            if (typeof time !== 'string') return;
             scheduleNotification(prayer, time);
           });
         }

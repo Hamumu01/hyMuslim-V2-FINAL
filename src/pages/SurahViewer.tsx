@@ -13,6 +13,10 @@ interface Verse {
   translation: string;
 }
 
+interface Chapter {
+  chapter: number;
+  verses: Verse[];
+}
 interface Surah {
   number: number;
   name: string;
@@ -51,7 +55,7 @@ const SurahViewer = () => {
         const arabicData = await arabicResponse.json();
         
         // Fetch Indonesian translation from a different reliable source
-        let indonesianData = { chapters: [] };
+  let indonesianData: { chapters: Chapter[] } = { chapters: [] };
         
         try {
           // Try first API endpoint
@@ -79,8 +83,9 @@ const SurahViewer = () => {
               chapters: [{
                 chapter: parseInt(surahNumber),
                 verses: translationData.translations.map((item: any, index: number) => ({
-                  verse: index + 1,
-                  text: item.text
+                  number: index + 1,
+                  text: item.text,
+                  translation: item.text // fallback, will be cleaned later
                 }))
               }]
             };
@@ -92,17 +97,14 @@ const SurahViewer = () => {
         
         if (arabicData.code === 200) {
           // Find the Indonesian translation for this surah
-          const translationChapters = indonesianData.chapters || [];
-          const thisChapter = translationChapters.find((c: any) => c.chapter === parseInt(surahNumber));
+          const translationChapters: Chapter[] = indonesianData.chapters || [];
+          const thisChapter = translationChapters.find((c) => c.chapter === parseInt(surahNumber));
           
           // Combine Arabic text with Indonesian translation
           const verses = arabicData.data.ayahs.map((ayah: any, index: number) => {
-            let translation = thisChapter && thisChapter.verses[index] ? 
-              thisChapter.verses[index].text : 'Translation not available';
-            
+            let translation = thisChapter?.verses?.[index]?.text ?? 'Translation not available';
             // Clean translation text by removing HTML tags and footnotes
             translation = cleanQuranText(translation);
-            
             return {
               number: ayah.numberInSurah,
               text: ayah.text,

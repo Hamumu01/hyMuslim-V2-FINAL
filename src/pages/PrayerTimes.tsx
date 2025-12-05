@@ -68,6 +68,7 @@ const PrayerTimes = () => {
         // Schedule notifications if enabled
         if (notificationsEnabled) {
           Object.entries(times).forEach(([prayer, time]) => {
+            if (typeof time !== 'string') return;
             scheduleNotification(prayer, time);
           });
         }

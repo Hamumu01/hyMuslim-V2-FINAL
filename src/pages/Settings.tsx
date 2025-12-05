@@ -29,7 +29,11 @@ const Settings = () => {
     // Load notification preferences
     const prefs = getNotificationPreferences();
     setNotificationsEnabled(prefs.enabled);
-    setPrayerNotifications(prefs.prayers);
+    const normalizeToPrayerPrefs = (src: Record<string, boolean>) => ({
+      Subuh: !!src.Subuh, Dzuhur: !!src.Dzuhur, Ashar: !!src.Ashar,
+      Maghrib: !!src.Maghrib, Isya: !!src.Isya
+    });
+    setPrayerNotifications(normalizeToPrayerPrefs(prefs.prayers));
     setMinutesBefore(prefs.minutesBefore);
 
     // Load font settings

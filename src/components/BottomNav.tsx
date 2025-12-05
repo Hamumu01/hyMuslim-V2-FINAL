@@ -9,7 +9,6 @@ const BottomNav = () => {
   
   useEffect(() => {
     // Update active tab based on current location
-    const path = location.pathname === '/' ? '/' : location.pathname.split('/')[1];
   }, [location.pathname]);
   
   const getActiveRoute = (path: string) => {
